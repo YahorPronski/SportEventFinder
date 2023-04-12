@@ -1,0 +1,12 @@
+@import '../../variables/colors';
+
+.post-form {
+    overflow: hidden;
+    padding: 1.875rem;
+    width: 100%;
+    height: auto;
+    background-color: $color-background-primary;
+    box-sizing: border-box;
+    border: 2px solid $color-border-primary;
+    border-radius: 10px;
+}

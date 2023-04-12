@@ -1,0 +1,12 @@
+@font-face {
+    font-family: roboto-regular;
+    src: url('../../fonts/Roboto-Regular.ttf');
+}
+
+@font-face {
+    font-family: icons-regular;
+    src: url('../../fonts/Icons-Regular.ttf');
+}
+
+$font-family-primary: roboto-regular, sans-serif;
+$font-family-icons: icons-regular, sans-serif;

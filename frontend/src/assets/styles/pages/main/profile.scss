@@ -1,0 +1,12 @@
+@import '../../common/default.scss';
+@import '../../variables/colors.scss';
+
+.profile-page {
+    max-width: 40rem;
+    margin: 0 auto;
+
+    border-left: 2px solid $color-border-primary;
+    border-right: 2px solid $color-border-primary;
+    border-bottom: 2px solid $color-border-primary;
+    background-color: $color-background-primary;
+}
