@@ -1,0 +1,27 @@
+.filter-bar {
+    margin: 20px 10px 20px auto;
+    max-width: 150px;
+
+    h3 {
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        margin: 10px 0;
+    }
+
+    label {
+        display: block;
+        padding-bottom: 15px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    input[type="checkbox"] {
+        margin-right: 10px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

@@ -2,18 +2,24 @@ import React from 'react';
 import Header from '../components/Header';
 import HeroSearch from '../components/HeroSearch';
 import EventPreview from '../components/EventPreview';
-import '../assets/styles/st.scss'
+import FilterBar from '../components/FilterBar';
+import '../assets/styles/pages/home-page.scss'
 
 const HomePage = () => {
     return (
         <>
             <Header />
             <HeroSearch />
-	        <div className="event-list">
-                <EventPreview />
-                <EventPreview />
-		        <EventPreview />
-		        <EventPreview />
+	        <div className="main-container">
+	            <div className="left">
+	                <FilterBar />
+	            </div>
+	            <div className="right">
+                    <EventPreview />
+                    <EventPreview />
+                    <EventPreview />
+                    <EventPreview />
+                </div>
 	        </div>
 	    </>
     );

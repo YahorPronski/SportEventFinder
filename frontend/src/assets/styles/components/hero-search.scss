@@ -1,9 +1,14 @@
-@import './variables/colors.scss';
+@import '../variables/colors.scss';
 
 .hero-search {
-    padding: 70px 150px;
+    padding: 70px 0;
     color: $color-white;
     background-color: $color-blue-dark;
+
+    &__container {
+        margin: 0 auto;
+        max-width: 700px;
+    }
 
     &__title {
         font-size: 2.2rem;

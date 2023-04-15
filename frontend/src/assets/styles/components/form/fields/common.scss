@@ -1,8 +1,0 @@
-.required {
-    display: inline;
-
-    &:after {
-        content: ' *';
-        color: red;
-    }
-}

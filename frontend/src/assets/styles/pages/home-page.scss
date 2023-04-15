@@ -1,0 +1,15 @@
+@import '../default.scss';
+
+.main-container {
+  display: flex;
+}
+
+.main-container .left {
+  width: 25%;
+  background-color: #eee;
+}
+
+.main-container .right {
+  width: 75%;
+  background-color: #eee;
+}

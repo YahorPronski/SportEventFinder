@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../assets/styles/header.scss';
+import '../assets/styles/components/header.scss';
 import logo from '../assets/images/logo.png';
 import profile from '../assets/images/profile.png';
 import logout from '../assets/images/logout.png';
