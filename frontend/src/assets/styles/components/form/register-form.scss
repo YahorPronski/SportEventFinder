@@ -1,17 +1,20 @@
 @import '../../variables/colors';
 
-.login-form {
+.register-form {
     width: 100%;
     padding: 1.875rem;
     background-color: $color-white;
     border: 2px solid $color-gray-light;
     border-radius: 10px;
 
-    .fields-row {
+    .field-set {
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        gap: 1rem;
+        justify-content: space-evenly;
+        gap: 1.875rem;
+
+        > div {
+            width: 100%;
+        }
+
     }
 }

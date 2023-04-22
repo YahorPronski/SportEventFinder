@@ -1,0 +1,16 @@
+@import '../index.scss';
+@import '../variables/colors.scss';
+
+.register-page {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    background-color: $color-blue-dark;
+
+    .register-section {
+        width: 800px;
+        margin: 0 auto;
+    }
+}

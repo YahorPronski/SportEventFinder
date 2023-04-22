@@ -1,8 +1,52 @@
-@import './common.scss';
+@import '../../../variables/colors';
 
 .file-upload {
-    display: block;
+    height: 170px;
+    max-width: 100%;
+    text-align: center;
+    position: relative;
+}
+
+#file-upload__input {
+    display: none;
+}
+
+#file-upload__label {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-width: 2px;
+    border-radius: 5px;
+    border-style: dashed;
+    border-color: #cbd5e1;
+    background-color: #f8fafc;
+}
+
+#file-upload__label.drag-active {
+    background-color: $color-white;
+}
+
+.file-upload__button {
+    cursor: pointer;
+    padding: 0.25rem;
+    font-size: 1rem;
+    color: $color-blue;
+    border: none;
+    background-color: transparent;
+
+    &:hover {
+        text-decoration-line: underline;
+    }
+}
+
+.file-upload__drag-element {
+    position: absolute;
     width: 100%;
-    margin-top: 0.625rem;
-    margin-bottom: 1.625rem;
+    height: 100%;
+    border-radius: 1rem;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
 }
