@@ -1,4 +1,4 @@
-//import '../../../assets/styles/components/form/fields/textarea.scss';
+import '../../../assets/styles/components/form/elements/text-area.scss';
 
 const TextArea = ({label, name, value, onChange, required}) => {
     const labelCss = required ? "required" : "";

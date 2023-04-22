@@ -1,4 +1,4 @@
-//import '../../../assets/styles/components/form/fields/textinput.scss';
+import '../../../assets/styles/components/form/elements/text-input.scss';
 
 const TextInput = ({label, name, value, onChange, hidden, required}) => {
     const type = hidden ? "password" : "text";

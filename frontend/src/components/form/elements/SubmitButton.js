@@ -1,4 +1,4 @@
-//import '../../../assets/styles/components/form/fields/submitbutton.scss';
+import '../../../assets/styles/components/form/elements/submit-button.scss';
 
 const SubmitButton = ({text, onClick}) => {
     return (

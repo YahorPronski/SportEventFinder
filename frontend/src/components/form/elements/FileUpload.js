@@ -1,4 +1,4 @@
-//import '../../../assets/styles/components/form/fields/fileupload.scss';
+import '../../../assets/styles/components/form/elements/file-upload.scss';
 
 const FileUpload = ({label, accept, onChange, required}) => {
     const labelCss = required ? "required" : "";
