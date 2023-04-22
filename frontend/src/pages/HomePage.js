@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../components/Header';
+import Header from '../components/layout/Header';
 import HeroSearch from '../components/HeroSearch';
 import EventPreview from '../components/EventPreview';
 import FilterBar from '../components/FilterBar';

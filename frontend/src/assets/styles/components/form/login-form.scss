@@ -1,0 +1,19 @@
+@import '../../variables/colors';
+
+.login-form {
+    overflow: hidden;
+    padding: 1.875rem;
+    width: 100%;
+    height: auto;
+    background-color: $color-white;
+    border: 2px solid $color-white-dark;
+    border-radius: 10px;
+
+    .fields-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+    }
+}

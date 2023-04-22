@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../assets/styles/components/header.scss';
-import logo from '../assets/images/logo.png';
-import profile from '../assets/images/profile.png';
-import logout from '../assets/images/logout.png';
+import '../../assets/styles/components/header.scss';
+import logo from '../../assets/images/logo.png';
+import profile from '../../assets/images/profile.png';
+import logout from '../../assets/images/logout.png';
 
 const Header = () => {
     return (
@@ -14,16 +14,16 @@ const Header = () => {
             </Link>
             <nav className="header__nav">
                 <ul>
-                    <li>
+                    /*<li>
                         <Link to="/">
                             <img src={profile} alt="Logo" />
                             <p>Profile</p>
                         </Link>
-                    </li>
+                    </li>*/
                     <li>
-                        <Link to="/">
+                        <Link to="/login">
                             <img src={logout} alt="Logo" />
-                            <p>Logout</p>
+                            <p>Sign In</p>
                         </Link>
                     </li>
                 </ul>

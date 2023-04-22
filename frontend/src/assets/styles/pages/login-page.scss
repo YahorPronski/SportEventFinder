@@ -1,0 +1,16 @@
+@import '../index.scss';
+@import '../variables/colors.scss';
+
+.login-page {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    background-color: $color-blue-dark;
+
+    .login-section {
+        max-width: 416px;
+        margin: 0 auto;
+    }
+}

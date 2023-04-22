@@ -1,0 +1,54 @@
+@import '../variables/colors.scss';
+
+.image-text {
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+
+    &__image {
+        display: block;
+    }
+
+    &__text {
+        color: $color-white;
+    }
+
+    &.small {
+        .image-text__image {
+            width: 48px;
+            height: 48px;
+            margin: 1.5rem 0;
+        }
+
+        .image-text__text {
+            font-size: 2rem;
+        }
+    }
+
+    &.medium {
+        .image-text__image {
+            width: 80px;
+            height: 80px;
+            margin: 1.5rem 0;
+        }
+
+        .image-text__text {
+            font-size: 2rem;
+        }
+    }
+
+    &.big {
+        .image-text__image {
+            width: 112px;
+            height: 112px;
+            margin: 1.5rem 0;
+        }
+
+        .image-text__text {
+            font-size: 2rem;
+        }
+    }
+}
