@@ -55,12 +55,12 @@ const RegisterForm = () => {
         }));
     };
 
-    const handleAvatarUpload = function(event) {
-        if (event.target.files && event.target.files[0]) {
-            console.log(event.target.files[0]);
-        } else if (event.dataTransfer && event.dataTransfer.files && event.dataTransfer.files[0]) {
-            console.log(event.dataTransfer.files[0]);
-        }
+    const handleAvatarUpload = function(file) {
+        console.log(`Avatar uploaded: ${file}`)
+    };
+
+    const handleAvatarRemove = function(event) {
+        console.log(`Avatar removed`)
     };
 
     const validateForm = () => {
@@ -125,9 +125,9 @@ const RegisterForm = () => {
                             onChange={handleInput} />
                         <FileUpload
                             label="Avatar"
-                            name="avatarFile"
                             accept="image/*"
-                            onChange={handleAvatarUpload} />
+                            onUpload={handleAvatarUpload}
+                            onRemove={handleAvatarRemove} />
                     </div>
                 </div>
 

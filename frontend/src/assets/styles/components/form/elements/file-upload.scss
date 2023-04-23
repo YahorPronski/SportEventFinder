@@ -1,10 +1,11 @@
 @import '../../../variables/colors';
 
 .file-upload {
-    height: 170px;
+    height: 130px;
     max-width: 100%;
     text-align: center;
     position: relative;
+    margin-top: 0.6rem;
 }
 
 #file-upload__input {
