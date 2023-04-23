@@ -1,5 +1,5 @@
-import React from 'react';
 import Header from '../components/layout/Header';
+import Footer from '../components/layout/Footer';
 import HeroSearch from '../components/HeroSearch';
 import EventPreview from '../components/EventPreview';
 import FilterBar from '../components/FilterBar';
@@ -21,6 +21,7 @@ const HomePage = () => {
                     <EventPreview />
                 </div>
 	        </div>
+	        <Footer />
 	    </>
     );
 };

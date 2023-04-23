@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import '../../../assets/styles/components/form/elements/file-upload.scss';
 
-const FileUpload = ({ label, accept, onUpload, onRemove }) => {
+const FileUpload = ({label, accept, onUpload, onRemove}) => {
     const [fileUploadText, setFileUploadText] = useState('Drag and drop your file here or');
     const [uploadButtonText, setUploadButtonText] = useState('Upload a file');
     const [fileUploaded, setFileUploaded] = useState(false);

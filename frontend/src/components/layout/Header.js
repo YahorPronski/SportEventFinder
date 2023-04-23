@@ -1,8 +1,8 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import '../../assets/styles/components/header.scss';
+import '../../assets/styles/components/layout/header.scss';
 import logo from '../../assets/images/logo.png';
 import profile from '../../assets/images/profile.png';
+import login from '../../assets/images/login.png';
 import logout from '../../assets/images/logout.png';
 
 const Header = () => {
@@ -14,15 +14,21 @@ const Header = () => {
             </Link>
             <nav className="header__nav">
                 <ul>
-                    /*<li>
+                    <li>
+                        <Link to="/logout">
+                            <img src={logout} alt="logout" />
+                            <p>Logout</p>
+                        </Link>
+                    </li>
+                    <li>
                         <Link to="/">
-                            <img src={profile} alt="Logo" />
+                            <img src={profile} alt="logo" />
                             <p>Profile</p>
                         </Link>
-                    </li>*/
+                    </li>
                     <li>
                         <Link to="/login">
-                            <img src={logout} alt="Logo" />
+                            <img src={login} alt="login" />
                             <p>Sign In</p>
                         </Link>
                     </li>

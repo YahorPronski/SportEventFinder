@@ -4,7 +4,6 @@
     max-width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
     gap: 1rem;
     text-align: center;
@@ -19,13 +18,13 @@
 
     &.small {
         .image-text__image {
-            width: 48px;
-            height: 48px;
-            margin: 1.5rem 0;
+            width: 38px;
+            height: 38px;
+            margin: 1.1rem 0;
         }
 
         .image-text__text {
-            font-size: 2rem;
+            font-size: 1.2rem;
         }
     }
 
@@ -51,5 +50,17 @@
         .image-text__text {
             font-size: 2rem;
         }
+    }
+
+    &.left {
+        justify-content: left;
+    }
+
+    &.center {
+        justify-content: center;
+    }
+
+    &.right {
+        justify-content: right;
     }
 }

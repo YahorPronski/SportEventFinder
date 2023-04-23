@@ -6,9 +6,16 @@ const sizeStyleMap = {
     big: "big",
 };
 
-const ImageText = ({imgSrc, imgAlt, size, children}) => {
+const alignStyleMap = {
+    left: "left",
+    center: "center",
+    right: "right",
+};
+
+const ImageText = ({imgSrc, imgAlt, size, align, children}) => {
     const sizeCss = sizeStyleMap[size] || sizeStyleMap.medium;
-    const wrapperCss = `image-text ${sizeCss}`;
+    const alignCss = alignStyleMap[align] || alignStyleMap.center;
+    const wrapperCss = `image-text ${sizeCss} ${alignCss}`;
 
     return (
         <div className={wrapperCss}>

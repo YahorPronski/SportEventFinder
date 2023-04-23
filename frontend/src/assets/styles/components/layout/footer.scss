@@ -1,0 +1,44 @@
+@import '../../variables/colors.scss';
+
+.footer {
+    display: flex;
+    align-items: center;
+    height: 80px;
+    text-align: center;
+    background-color: black;
+    padding: 0 2rem;
+
+    > div {
+        flex-basis: 100px;
+    }
+
+    > div:first-child {
+        text-align: left;
+    }
+
+    > div:first-child,
+    > div:last-child {
+        flex-grow: 1;
+        color: $color-white;
+    }
+
+    > div:nth-child(2) {
+        flex-grow: 2;
+        color: $color-gray;
+        font-size: 0.9rem;
+        text-align: center;
+        text-transform: uppercase;
+
+        a {
+            cursor: pointer;
+            color: $color-gray;
+            text-decoration: none;
+
+            &:hover {
+                color: gray;
+                text-decoration: underline;
+                text-underline: $color-gray;
+            }
+        }
+    }
+}
