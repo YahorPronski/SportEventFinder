@@ -10,7 +10,7 @@ const HomePage = () => {
         <>
             <Header />
             <HeroSearch />
-	        <div className="main-container">
+	        <div className="home-page">
 	            <div className="left">
 	                <FilterBar />
 	            </div>

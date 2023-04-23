@@ -1,17 +1,66 @@
 @import '../variables/colors.scss';
 
 .hero-search {
-    padding: 70px 0;
+    padding: 50px 0 30px 0;
     color: $color-white;
     background-color: $color-blue;
 
     &__container {
-        margin: 0 auto;
+        margin: 0 auto 0 25%;
         max-width: 700px;
+    }
+
+    &__search-bar {
+        display: flex;
+        align-items: center;
+        padding-bottom: 8px;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid white;
+        margin-bottom: 30px;
+
+        img {
+            width: 25px;
+            height: 25px;
+            margin-right: 10px;
+        }
+
+        input[type="text"] {
+            background: transparent;
+            border: none;
+            font-size: 1rem;
+            color: white;
+            padding-left: 10px;
+            width: 100%;
+            outline: none;
+
+            &::placeholder {
+              color: white;
+              opacity: 1;
+            }
+        }
     }
 
     &__title {
         font-size: 2.2rem;
         margin-bottom: 50px;
+    }
+
+    &__select {
+        margin-right: 20px;
+
+        select {
+            padding: 3px;
+            font-size: 16px;
+            margin-left: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            background-color: #fff;
+            color: #333;
+
+            &:focus {
+                outline: none;
+            }
+        }
     }
 }

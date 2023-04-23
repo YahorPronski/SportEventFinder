@@ -1,9 +1,11 @@
+@import '../variables/colors';
+
 .event-preview {
     display: flex;
     align-items: center;
-    margin: 20px;
+    margin: 20px 20px 20px 0;
     padding: 20px;
-    background-color: #fff;
+    background-color: $color-white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
 
@@ -22,11 +24,11 @@
     }
 
     p {
-      margin: 5px 0;
-      font-size: 16px;
+        margin: 5px 0;
+        font-size: 16px;
     }
 
     .event-info {
-      flex: 1;
+        flex: 1;
     }
 }

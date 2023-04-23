@@ -1,15 +1,11 @@
 @import '../index.scss';
 @import '../variables/colors.scss';
 
-.home-page {
+.profile-edit-page {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 60px 0;
     background-color: $color-white-dark;
-}
-
-.home-page .left {
-    width: 25%;
-}
-
-.home-page .right {
-    width: 75%;
 }

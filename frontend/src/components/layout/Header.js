@@ -21,17 +21,17 @@ const Header = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/">
+                        <Link to="/profile">
                             <img src={profile} alt="logo" />
                             <p>Profile</p>
                         </Link>
                     </li>
-                    <li>
+                    {/*<li>
                         <Link to="/login">
                             <img src={login} alt="login" />
                             <p>Sign In</p>
                         </Link>
-                    </li>
+                    </li>*/}
                 </ul>
             </nav>
         </header>

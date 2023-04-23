@@ -1,0 +1,40 @@
+@import '../index.scss';
+@import '../variables/colors.scss';
+
+.profile-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 30px 0;
+    background-color: $color-white-dark;
+}
+
+.profile {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 100%;
+    width: 900px;
+    padding: 30px;
+    background-color: $color-white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    gap: 30px;
+
+    &__avatar {
+        border-radius: 4px;
+    }
+
+    &__info {
+        flex-grow: 2;
+    }
+
+    &__full-name {
+        font-size: 2rem;
+    }
+
+    &__username {
+        color: $color-gray;
+    }
+}
