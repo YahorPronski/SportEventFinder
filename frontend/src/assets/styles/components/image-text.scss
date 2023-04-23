@@ -8,6 +8,10 @@
     gap: 1rem;
     text-align: center;
 
+    &:hover {
+        text-decoration: none;
+    }
+
     &__image {
         display: block;
         object-fit: contain;

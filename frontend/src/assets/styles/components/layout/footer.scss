@@ -5,7 +5,7 @@
     align-items: center;
     height: 80px;
     text-align: center;
-    background-color: black;
+    background-color: $color-blue-dark;
     padding: 0 2rem;
 
     > div {
@@ -24,21 +24,25 @@
 
     > div:nth-child(2) {
         flex-grow: 2;
-        color: $color-gray;
+        color: $color-white;
         font-size: 0.9rem;
         text-align: center;
         text-transform: uppercase;
 
         a {
             cursor: pointer;
-            color: $color-gray;
-            text-decoration: none;
+            color: $color-white;
+        }
+    }
 
-            &:hover {
-                color: gray;
-                text-decoration: underline;
-                text-underline: $color-gray;
-            }
+    &__contacts {
+        a {
+            margin: 0 5px;
+        }
+        img {
+            width: 36px;
+            height: 36px;
+            filter: invert(100%);
         }
     }
 }
