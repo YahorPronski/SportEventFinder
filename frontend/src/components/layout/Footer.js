@@ -1,4 +1,4 @@
-import ImageText from "../../components/ImageText";
+import ImageText from "../ImageText";
 import '../../assets/styles/components/layout/footer.scss';
 import logo from '../../assets/images/logo.png';
 

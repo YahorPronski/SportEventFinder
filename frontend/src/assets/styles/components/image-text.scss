@@ -10,6 +10,7 @@
 
     &__image {
         display: block;
+        object-fit: contain;
     }
 
     &__text {
@@ -18,9 +19,9 @@
 
     &.small {
         .image-text__image {
-            width: 38px;
-            height: 38px;
-            margin: 1.1rem 0;
+            width: 46px;
+            height: 46px;
+            margin: 0.5rem 0;
         }
 
         .image-text__text {
