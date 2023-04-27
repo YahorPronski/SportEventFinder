@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface UserService {
     User saveUser(User user, byte[] avatar);
-    Optional<User> getUserById(String userId);
+    User updateUser(Long userId, User user, byte[] avatar);
     Optional<User> getUserById(Long userId);
     Optional<User> getUserByCredentials(String username, String password);
     User updateUserPassword(Long userId, String newPassword);

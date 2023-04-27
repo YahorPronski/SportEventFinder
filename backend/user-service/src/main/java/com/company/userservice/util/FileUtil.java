@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Base64;
 
 @Slf4j
@@ -32,7 +33,7 @@ public class FileUtil {
 
         Path filePath = uploadPath.resolve(fileName);
         try (InputStream inputStream = new ByteArrayInputStream(file)) {
-            Files.copy(inputStream, filePath);
+            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             log.error("Could not save file {}", filePath.toAbsolutePath(), e);
         }

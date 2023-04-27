@@ -32,25 +32,26 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Account with this email already exists");
         }
         if (userService.isUsernameExists(userRequest.getUsername())) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Account with this username already exists");
+            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Account with this username already exists");
         }
         User user = modelMapper.map(userRequest, User.class);
         byte[] userAvatar = getByteArrayFromBase64(userRequest.getAvatarBase64());
         userService.saveUser(user, userAvatar);
     }
 
-    @PostMapping("/login")
-    public Long getUserIdByCredentials(@RequestBody @Valid CredentialsDto credentialsDto) {
-        return userService
-                .getUserByCredentials(credentialsDto.getUsername(), credentialsDto.getPassword())
-                .map(User::getId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials"));
-    }
-
     @PatchMapping("/profile")
     public void updateUserProfileInfo(@RequestBody @Valid UpdateUserInfoDto userInfoDto,
                                       @RequestHeader("X-auth-user-id") Long userId) {
-        // TODO
+        User loggedInUser = userService.getUserById(userId).get();
+        if (!loggedInUser.getEmail().equals(userInfoDto.getEmail()) && userService.isEmailExists(userInfoDto.getEmail())) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Account with this email already exists");
+        }
+        if (!loggedInUser.getUsername().equals(userInfoDto.getUsername()) && userService.isUsernameExists(userInfoDto.getUsername())) {
+            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Account with this username already exists");
+        }
+        User user = modelMapper.map(userInfoDto, User.class);
+        byte[] userAvatar = getByteArrayFromBase64(userInfoDto.getAvatarBase64());
+        userService.updateUser(userId, user, userAvatar);
     }
 
     @PatchMapping("/password")

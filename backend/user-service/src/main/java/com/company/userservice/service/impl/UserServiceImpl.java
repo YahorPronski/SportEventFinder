@@ -5,7 +5,6 @@ import com.company.userservice.repository.UserRepository;
 import com.company.userservice.service.UserService;
 import com.company.userservice.util.FileUtil;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -27,11 +26,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> getUserById(String userId) {
-        if (!NumberUtils.isParsable(userId)) {
-            return Optional.empty();
+    public User updateUser(Long userId, User user, byte[] avatar) {
+        user.setId(userId);
+        User updatedUser = userRepository.save(user);
+        if (avatar != null && avatar.length > 0) {
+            fileUtil.saveFile(userId.toString(), "avatar", avatar);
         }
-        return getUserById(Long.parseLong(userId));
+        return updatedUser;
     }
 
     @Override
