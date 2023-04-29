@@ -8,7 +8,10 @@ import java.util.Optional;
 
 public interface AuthService {
     JwtDto loginUser(LoginRequest loginRequest);
+
     void registerUser(RegisterRequest registerRequest);
+
     Optional<Long> getUserIdFromToken(String accessToken);
+
     Optional<JwtDto> refreshJwt(String refreshToken);
 }
