@@ -2,6 +2,6 @@ FROM openjdk:8-jdk-alpine
 
 WORKDIR /app
 
-COPY api-gateway.jar .
+COPY target/api-gateway-1.0.0.jar .
 
-CMD ["java", "-jar", "api-gateway.jar"]
+CMD ["java", "-jar", "api-gateway-1.0.0.jar"]
