@@ -1,4 +1,5 @@
-target/
+**/target/**
+!**/target/*.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
