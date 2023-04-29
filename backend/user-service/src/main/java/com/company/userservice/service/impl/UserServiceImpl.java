@@ -7,7 +7,10 @@ import com.company.userservice.util.FileUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 @RequiredArgsConstructor
@@ -15,6 +18,13 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final FileUtil fileUtil;
+
+    @Override
+    public List<User> getAllUsers() {
+        return StreamSupport
+                .stream(userRepository.findAll().spliterator(), false)
+                .collect(Collectors.toList());
+    }
 
     @Override
     public User saveUser(User user, byte[] avatar) {

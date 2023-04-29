@@ -1,9 +1,6 @@
 package com.company.userservice.controller;
 
-import com.company.userservice.dto.CredentialsDto;
-import com.company.userservice.dto.UpdatePasswordDto;
-import com.company.userservice.dto.UpdateUserInfoDto;
-import com.company.userservice.dto.UserRequest;
+import com.company.userservice.dto.*;
 import com.company.userservice.model.User;
 import com.company.userservice.service.UserService;
 import com.company.userservice.util.FileUtil;
@@ -15,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/users")
@@ -24,6 +23,13 @@ public class UserController {
     private final UserService userService;
     private final ModelMapper modelMapper;
     private final FileUtil fileUtil;
+
+    @GetMapping
+    public List<UserResponse> getAllUsers() {
+        return userService.getAllUsers().stream()
+                .map(user -> modelMapper.map(user, UserResponse.class))
+                .collect(Collectors.toList());
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
