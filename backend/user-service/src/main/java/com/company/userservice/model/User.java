@@ -1,14 +1,11 @@
 package com.company.userservice.model;
 
 import lombok.Data;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
-@Table(name = "uzer")
+@Table(name = "users")
 @Data
 public class User {
 
