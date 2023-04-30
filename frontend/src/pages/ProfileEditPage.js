@@ -9,7 +9,9 @@ const ProfileEditPage = () => {
         <>
             <Header />
             <div className="profile-edit-page">
-                <ProfileEditForm />
+                <div className="profile-edit-section">
+                    <ProfileEditForm />
+                </div>
             </div>
 	        <Footer />
 	    </>

@@ -11,7 +11,7 @@ import editIcon from '../assets/images/edit.png';
 
 const ProfilePage = () => {
     const [user, setUser] = useState({});
-    const [avatarSrc, setAvatarSrc] = useState(null);
+    const [avatarSrc, setAvatarSrc] = useState('https://via.placeholder.com/250');
 
     useEffect(() => {
         UserService.getLoggedInUser().then(setUser);
@@ -20,8 +20,6 @@ const ProfilePage = () => {
     useEffect(() => {
         if (user.avatarBase64) {
             setAvatarSrc(`data:image/jpg;base64,${user.avatarBase64}`);
-        } else {
-            setAvatarSrc('https://via.placeholder.com/250');
         }
     }, [user.avatarBase64]);
 

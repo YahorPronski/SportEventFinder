@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import useAuthContext from "../../context/useAuthContext";
 import * as AuthService from "../../services/AuthService";
@@ -14,10 +13,10 @@ import logout from '../../assets/images/logout.png';
 const Header = () => {
     const { updateAuthContext } = useAuthContext();
 
-    const handleLogout = useCallback(() => {
+    const handleLogout = () => {
         AuthService.logout();
         updateAuthContext();
-    }, [updateAuthContext]);
+    };
 
     return (
         <header className="header">

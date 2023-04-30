@@ -41,7 +41,10 @@ const PasswordEditForm = () => {
             }
         };
 
-        UserService.updateUserPassword(passwords, onSuccess, onError);
+        UserService.updateUserPassword({
+            oldPassword: passwords.oldPassword,
+            newPassword: passwords.newPassword,
+        }, onSuccess, onError);
     };
 
     const handleInput = (event) => {

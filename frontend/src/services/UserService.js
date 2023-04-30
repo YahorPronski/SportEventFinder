@@ -17,8 +17,14 @@ export const getLoggedInUserId = async () => {
     return AuthService.validateAuth();
 };
 
+export const updateUserInfo = async (userInfo, onSuccess, onError) => {
+    API.patch('users/current', userInfo, requestConfig())
+        .then(onSuccess)
+        .catch(onError);
+};
+
 export const updateUserPassword = async (passwords, onSuccess, onError) => {
-    API.patch('users/password', passwords)
+    API.patch('users/current/password', passwords, requestConfig())
         .then(onSuccess)
         .catch(onError);
 };
