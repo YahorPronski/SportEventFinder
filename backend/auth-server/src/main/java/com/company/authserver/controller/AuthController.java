@@ -31,7 +31,7 @@ public class AuthController {
         authService.registerUser(registerRequest);
     }
 
-    @GetMapping("/validate")
+    @PostMapping("/validate")
     public Long validate(@RequestBody @NotNull JwtDto jwtDto) {
         String accessToken = jwtDto.getAccessToken();
         if (StringUtils.isBlank(accessToken)) {
@@ -41,7 +41,7 @@ public class AuthController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid access token"));
     }
 
-    @GetMapping("/refresh")
+    @PostMapping("/refresh")
     public JwtDto refresh(@RequestBody @NotNull JwtDto jwtDto) {
         String refreshToken = jwtDto.getAccessToken();
         if (StringUtils.isBlank(refreshToken)) {

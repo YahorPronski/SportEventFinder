@@ -13,6 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -31,6 +32,15 @@ public class UserController {
                 .collect(Collectors.toList());
     }
 
+    @PostMapping("/login")
+    public Long loginUser(@RequestBody @Valid LoginRequest loginRequest) {
+        Optional<User> user = userService.getUserByUsernameOrEmail(loginRequest.getUsernameOrEmail());
+        if (!user.isPresent() || !user.get().getPassword().equals(loginRequest.getPassword())) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid username/email or password");
+        }
+        return user.get().getId();
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void saveUser(@RequestBody @Valid UserRequest userRequest) {
@@ -46,7 +56,7 @@ public class UserController {
     }
 
     @PatchMapping("/profile")
-    public void updateUserProfileInfo(@RequestBody @Valid UpdateUserInfoDto userInfoDto,
+    public void updateUserProfile(@RequestBody @Valid UpdateUserInfoDto userInfoDto,
                                       @RequestHeader("X-auth-user-id") Long userId) {
         User loggedInUser = userService.getUserById(userId).get();
         if (!loggedInUser.getEmail().equals(userInfoDto.getEmail()) && userService.isEmailExists(userInfoDto.getEmail())) {

@@ -14,7 +14,7 @@ public interface UserService {
 
     Optional<User> getUserById(Long userId);
 
-    Optional<User> getUserByCredentials(String username, String password);
+    Optional<User> getUserByUsernameOrEmail(String usernameOrEmail);
 
     User updateUserPassword(Long userId, String newPassword);
 

@@ -6,11 +6,11 @@ import com.company.authserver.dto.RegisterRequest;
 import com.company.authserver.service.AuthService;
 import com.company.authserver.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.ResponseStatusException;
+import reactor.core.publisher.Mono;
 
 import java.util.Optional;
 
@@ -24,12 +24,15 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public JwtDto loginUser(LoginRequest loginRequest) {
         Long userId = webClientBuilder.build().post()
-                .uri("http://user-service/api/users/id")
+                .uri("http://user-service/api/users/login")
                 .body(BodyInserters.fromValue(loginRequest))
-                .retrieve()
-                .bodyToMono(Long.class)
-                .doOnError(error -> {
-                    throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, error.getMessage());
+                .exchangeToMono(clientResponse -> {
+                    if (clientResponse.statusCode().is2xxSuccessful()) {
+                        return clientResponse.bodyToMono(Long.class);
+                    } else {
+                        return clientResponse.bodyToMono(String.class)
+                                .flatMap(errorMessage -> Mono.error(new ResponseStatusException(clientResponse.statusCode(), errorMessage)));
+                    }
                 })
                 .block();
         return generateTokens(userId.toString());
@@ -40,10 +43,13 @@ public class AuthServiceImpl implements AuthService {
         webClientBuilder.build().post()
                 .uri("http://user-service/api/users")
                 .body(BodyInserters.fromValue(registerRequest))
-                .retrieve()
-                .bodyToMono(Void.class)
-                .doOnError(error -> {
-                    throw new ResponseStatusException(HttpStatus.CONFLICT, error.getMessage());
+                .exchangeToMono(clientResponse -> {
+                    if (clientResponse.statusCode().is2xxSuccessful()) {
+                        return clientResponse.bodyToMono(Void.class);
+                    } else {
+                        return clientResponse.bodyToMono(String.class)
+                                .flatMap(errorMessage -> Mono.error(new ResponseStatusException(clientResponse.statusCode(), errorMessage)));
+                    }
                 })
                 .block();
     }

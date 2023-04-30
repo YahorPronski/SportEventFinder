@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Service
 @RequiredArgsConstructor
@@ -21,9 +19,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUsers() {
-        return StreamSupport
-                .stream(userRepository.findAll().spliterator(), false)
-                .collect(Collectors.toList());
+        return userRepository.findAll();
     }
 
     @Override
@@ -51,8 +47,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> getUserByCredentials(String username, String password) {
-        return userRepository.findByUsernameAndPassword(username, password);
+    public Optional<User> getUserByUsernameOrEmail(String usernameOrEmail) {
+        return userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail);
     }
 
     @Override
