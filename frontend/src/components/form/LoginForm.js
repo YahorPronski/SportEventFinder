@@ -1,19 +1,28 @@
 import { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
-//import useAuthContext from "../../context/useAuthContext";
-//import * as AuthService from "../../services/authService";
+import useAuthContext from "../../context/useAuthContext";
+import * as AuthService from "../../services/AuthService";
+import AlertMessage from "../AlertMessage";
 import TextInput from "./elements/TextInput";
 import SubmitButton from "./elements/SubmitButton";
 import '../../assets/styles/components/form/login-form.scss';
 
 const LoginForm = () => {
     const navigate = useNavigate();
-    const { state } = useLocation();
-    //const { updateAuthContext } = useAuthContext();
+    const location = useLocation();
+    const { updateAuthContext } = useAuthContext();
 
-    const [credentials, setCredentials] = useState({username: '', password: ''});
+    const [credentials, setCredentials] = useState({usernameOrEmail: '', password: ''});
     const [errorMessage, setErrorMessage] = useState('');
     const errorMessageRef = useRef(null);
+
+    const registerSuccess = location.state?.registerSuccess;
+
+    useEffect(() => {
+        if (registerSuccess) {
+            delete location.state.registerSuccess;
+        }
+    }, [registerSuccess, location]);
 
     useEffect(() => {
         if (errorMessage) {
@@ -25,20 +34,21 @@ const LoginForm = () => {
         setErrorMessage("");
         if (!validateForm()) return;
 
-        /*const onSuccess = () => {
-            updateAuthContext().then(() => navigate("/profile"));
+        const onLoginSuccess = () => {
+            updateAuthContext().then(() => navigate("/"));
         };
 
-        const onError = (error) => {
+        const onLoginError = (error) => {
             if (error.response?.status === 401) {
                 setCredentials(creds => ({...creds, password: ''}));
                 setErrorMessage("Invalid username or password");
             } else {
                 setErrorMessage("Unexpected error, try again later");
+                console.log(error);
             }
         };
 
-        AuthService.login(credentials, onSuccess, onError)*/
+        AuthService.login(credentials, onLoginSuccess, onLoginError);
     };
 
     const handleInput = (event) => {
@@ -50,8 +60,8 @@ const LoginForm = () => {
 
     const validateForm = () => {
         const isBlank = (str) => !str || !str.trim().length;
-        if (isBlank(credentials.username) || isBlank(credentials.password)) {
-            setErrorMessage("Please enter username and password");
+        if (isBlank(credentials.usernameOrEmail) || isBlank(credentials.password)) {
+            setErrorMessage("Please enter username/email and password");
             return false;
         }
         return true;
@@ -61,9 +71,9 @@ const LoginForm = () => {
         <>
             <form className="login-form">
                 <TextInput
-                    label="Username"
-                    name="username"
-                    value={credentials.username}
+                    label="Username or Email"
+                    name="usernameOrEmail"
+                    value={credentials.usernameOrEmail}
                     onChange={handleInput}/>
                 <TextInput
                     label="Password"
@@ -75,11 +85,11 @@ const LoginForm = () => {
             </form>
 
             <div ref={errorMessageRef}>
-                {errorMessage && <Alert type="error">{errorMessage}</Alert>}
+                {errorMessage && <AlertMessage type="error">{errorMessage}</AlertMessage>}
             </div>
 
-            {!errorMessage && state?.registerSuccess &&
-                <Alert type="success">You have successfully registered</Alert>
+            {!errorMessage && registerSuccess &&
+                <AlertMessage type="success">Registration successful! Please log in.</AlertMessage>
             }
         </>
     );

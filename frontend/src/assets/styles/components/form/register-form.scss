@@ -13,6 +13,12 @@
 
         > div {
             width: 100%;
+
+            > div:last-child {
+                > input {
+                    margin-bottom: 0;
+                }
+            }
         }
     }
 }

@@ -4,16 +4,16 @@ import Footer from '../components/layout/Footer';
 import ProfileEditForm from '../components/form/ProfileEditForm';
 import '../assets/styles/pages/profile-edit-page.scss';
 
-const HomePage = () => {
+const ProfileEditPage = () => {
     return (
         <>
             <Header />
             <div className="profile-edit-page">
-	            <ProfileEditForm />
+                <ProfileEditForm />
             </div>
 	        <Footer />
 	    </>
     );
 };
 
-export default HomePage;
+export default ProfileEditPage;

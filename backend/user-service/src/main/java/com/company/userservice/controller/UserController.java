@@ -32,6 +32,13 @@ public class UserController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping("/current")
+    public UserResponse getLoggedInUser(@RequestHeader("X-auth-user-id") Long userId) {
+        return userService.getUserById(userId)
+                .map(user -> mapUserToResponse(user, userService.getUserAvatar(userId)))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "User with id=" + userId + " doesn't exist"));
+    }
+
     @PostMapping("/login")
     public Long loginUser(@RequestBody @Valid LoginRequest loginRequest) {
         Optional<User> user = userService.getUserByUsernameOrEmail(loginRequest.getUsernameOrEmail());
@@ -57,7 +64,7 @@ public class UserController {
 
     @PatchMapping("/profile")
     public void updateUserProfile(@RequestBody @Valid UpdateUserInfoDto userInfoDto,
-                                      @RequestHeader("X-auth-user-id") Long userId) {
+                                  @RequestHeader("X-auth-user-id") Long userId) {
         User loggedInUser = userService.getUserById(userId).get();
         if (!loggedInUser.getEmail().equals(userInfoDto.getEmail()) && userService.isEmailExists(userInfoDto.getEmail())) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Account with this email already exists");
@@ -78,6 +85,14 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wrong old password");
         }
         userService.updateUserPassword(userId, passwordDto.getNewPassword());
+    }
+
+    private UserResponse mapUserToResponse(User user, byte[] userAvatar) {
+        UserResponse userResponse = modelMapper.map(user, UserResponse.class);
+        if (userAvatar != null && userAvatar.length != 0) {
+            userResponse.setAvatarBase64(fileUtil.encodeBase64(userAvatar));
+        }
+        return userResponse;
     }
 
     private byte[] getByteArrayFromBase64(String fileBase64) {

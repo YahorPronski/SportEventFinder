@@ -9,7 +9,9 @@ const PasswordEditPage = () => {
         <>
             <Header />
             <div className="password-edit-page">
-	            <PasswordEditForm />
+                <div className="password-edit-section">
+	                <PasswordEditForm />
+	            </div>
             </div>
 	        <Footer />
 	    </>

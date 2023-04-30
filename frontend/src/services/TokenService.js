@@ -7,11 +7,7 @@ export const getTokens = () => {
 };
 
 export const saveTokens = (tokens) => {
-    localStorage.setItem(AUTH_TOKENS, JSON.stringify({
-        type: tokens.type,
-        accessToken: tokens.accessToken,
-        refreshToken: tokens.refreshToken,
-    }));
+    localStorage.setItem(AUTH_TOKENS, JSON.stringify(tokens));
 };
 
 export const removeTokens = () => {

@@ -16,6 +16,8 @@ public interface UserService {
 
     Optional<User> getUserByUsernameOrEmail(String usernameOrEmail);
 
+    byte[] getUserAvatar(Long userId);
+
     User updateUserPassword(Long userId, String newPassword);
 
     boolean isEmailExists(String email);

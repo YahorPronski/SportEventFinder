@@ -17,11 +17,11 @@ import java.util.Base64;
 @Component
 public class FileUtil {
 
-    @Value("${user.avatar.upload.path}")
+    @Value("${user.files.upload.path}")
     private String uploadRootPath;
 
-    public void saveFile(String uploadDir, String fileName, byte[] file) {
-        Path uploadPath = Paths.get(uploadRootPath + uploadDir);
+    public void saveFile(String directory, String fileName, byte[] file) {
+        Path uploadPath = Paths.get(uploadRootPath, directory);
 
         if (!Files.exists(uploadPath)) {
             try {
@@ -39,8 +39,8 @@ public class FileUtil {
         }
     }
 
-    public byte[] readFile(String fileDir) {
-        Path absPath = Paths.get(uploadRootPath + fileDir);
+    public byte[] readFile(String directory, String fileName) {
+        Path absPath = Paths.get(uploadRootPath, directory, fileName);
         try {
             return Files.readAllBytes(absPath);
         } catch (IOException e) {

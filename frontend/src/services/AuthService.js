@@ -20,6 +20,20 @@ export const register = (userData, onSuccess, onError) => {
         .catch(onError);
 };
 
+export const validateAuth = async () => {
+    const accessToken = TokenService.getTokens()?.accessToken;
+    if (!accessToken) return;
+    try {
+        return (await API.post('auth/validate',
+            {
+                accessToken: accessToken
+            }
+        )).data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export const refreshAuth = async () => {
     const refreshToken = TokenService.getTokens()?.refreshToken;
     if (!refreshToken) return;
@@ -30,20 +44,6 @@ export const refreshAuth = async () => {
             }
         );
         TokenService.saveTokens(response.data);
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-export const validateAuth = async () => {
-    const accessToken = TokenService.getTokens()?.accessToken;
-    if (!accessToken) return;
-    try {
-        return (await API.post('auth/validate',
-            {
-                accessToken: accessToken
-            }
-        )).data;
     } catch (error) {
         console.log(error);
     }

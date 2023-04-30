@@ -1,12 +1,13 @@
 import { useRef, useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-//import * as AuthService from "../../services/authService";
+import * as AuthService from "../../services/AuthService";
+import AlertMessage from "../AlertMessage";
 import TextInput from "./elements/TextInput";
 import FileUpload from "./elements/FileUpload";
 import SubmitButton from "./elements/SubmitButton";
 import '../../assets/styles/components/form/register-form.scss';
 
-const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+const EMAIL_REGEX = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
 
 const RegisterForm = () => {
     const navigate = useNavigate();
@@ -18,6 +19,7 @@ const RegisterForm = () => {
         username: '',
         password: '',
         passwordConfirm: '',
+        avatarBase64: '',
     });
 
     const [errorMessage, setErrorMessage] = useState('');
@@ -39,6 +41,8 @@ const RegisterForm = () => {
 
         const onError = (error) => {
             if (error.response?.status === 409) {
+                setErrorMessage("Email already exists");
+            } else if (error.response?.status === 422) {
                 setErrorMessage("Username already exists");
             } else {
                 setErrorMessage("Unexpected error, try again later");
@@ -56,11 +60,21 @@ const RegisterForm = () => {
     };
 
     const handleAvatarUpload = function(file) {
-        console.log(`Avatar uploaded: ${file}`)
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            setUserInfo(userInfo => ({
+                ...userInfo,
+                avatarBase64: reader.result.split(',').pop(),
+            }));
+        };
     };
 
     const handleAvatarRemove = function(event) {
-        console.log(`Avatar removed`)
+        setUserInfo(userInfo => ({
+            ...userInfo,
+            avatarBase64: '',
+        }));
     };
 
     const validateForm = () => {
@@ -69,7 +83,7 @@ const RegisterForm = () => {
             setErrorMessage("Not all required fields are filled");
             return false;
         }
-        if (!emailRegex.test(userInfo.email)) {
+        if (!EMAIL_REGEX.test(userInfo.email)) {
             setErrorMessage("Email is not valid");
             return false;
         }
@@ -81,7 +95,7 @@ const RegisterForm = () => {
     };
 
     return (
-        <div>
+        <>
             <form className="register-form">
                 <div className="field-set">
                     <div>
@@ -130,14 +144,12 @@ const RegisterForm = () => {
                             onRemove={handleAvatarRemove} />
                     </div>
                 </div>
-
                 <SubmitButton text="Sign up" onClick={handleSubmit} />
             </form>
-
             <div ref={errorMessageRef}>
-                {errorMessage && <Alert type="error">{errorMessage}</Alert>}
+                {errorMessage && <AlertMessage type="error">{errorMessage}</AlertMessage>}
             </div>
-        </div>
+        </>
     );
 }
 

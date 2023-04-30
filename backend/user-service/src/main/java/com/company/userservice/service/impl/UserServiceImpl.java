@@ -52,6 +52,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public byte[] getUserAvatar(Long userId) {
+        return fileUtil.readFile(userId.toString(), "avatar");
+    }
+
+    @Override
     public User updateUserPassword(Long userId, String newPassword) {
         User user = userRepository.findById(userId).get();
         user.setPassword(newPassword);
