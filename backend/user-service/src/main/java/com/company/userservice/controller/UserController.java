@@ -14,7 +14,6 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/users")
@@ -60,9 +59,9 @@ public class UserController {
         userService.saveUser(user, userAvatar);
     }
 
-    @PatchMapping("/current/profile")
-    public void updateUserProfile(@RequestBody @Valid UserInfoDto userInfoDto,
-                                  @RequestHeader("X-auth-user-id") Long userId) {
+    @PatchMapping("/current")
+    public void updateUserInfo(@RequestBody @Valid UserInfoDto userInfoDto,
+                               @RequestHeader("X-auth-user-id") Long userId) {
         User loggedInUser = userService.getUserById(userId).get();
         if (!loggedInUser.getEmail().equals(userInfoDto.getEmail()) && userService.isEmailExists(userInfoDto.getEmail())) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Account with this email already exists");

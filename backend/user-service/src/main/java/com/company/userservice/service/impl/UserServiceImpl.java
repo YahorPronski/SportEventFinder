@@ -32,13 +32,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(Long userId, User user, byte[] avatar) {
-        user.setId(userId);
-        User updatedUser = userRepository.save(user);
+    public User updateUser(Long userId, User updatedUser, byte[] avatar) {
+        User existingUser = userRepository.findById(userId).get();
+        updatedUser.setId(userId);
+        if (updatedUser.getPassword() == null) {
+            updatedUser.setPassword(existingUser.getPassword());
+        }
         if (avatar != null && avatar.length > 0) {
             fileUtil.saveFile(userId.toString(), "avatar", avatar);
         }
-        return updatedUser;
+        return userRepository.save(updatedUser);
     }
 
     @Override
