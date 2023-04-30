@@ -24,20 +24,39 @@ services:
     depends_on:
       - db
 
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "8000:8000"
+      - "5000:5000"
+    environment:
+      SPRING_APPLICATION_NAME: api-gateway
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-server:8761/eureka/
+      JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5000"
+    depends_on:
+      - discovery-server
+      - auth-server
+      - user-service
+      - sport-event-service
+
   auth-server:
     build: ./auth-server
     ports:
       - "8001:8001"
+      - "5001:5001"
     environment:
       SPRING_APPLICATION_NAME: auth-server
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-server:8761/eureka/
+      JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5001"
     depends_on:
       - discovery-server
+      - user-service
 
   user-service:
     build: ./user-service
     ports:
       - "8002:8002"
+      - "5002:5002"
     environment:
       SPRING_APPLICATION_NAME: user-service
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-server:8761/eureka/
@@ -45,6 +64,7 @@ services:
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: 12345
       SPRING_JPA_HIBERNATE_DDL-AUTO: update
+      JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5002"
     depends_on:
       - db
       - discovery-server
@@ -54,6 +74,7 @@ services:
     build: ./sport-event-service
     ports:
       - "8003:8003"
+      - "5003:5003"
     environment:
       SPRING_APPLICATION_NAME: sport-event-service
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-server:8761/eureka/
@@ -61,19 +82,10 @@ services:
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: 12345
       SPRING_JPA_HIBERNATE_DDL-AUTO: update
+      JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5003"
     depends_on:
       - db
       - discovery-server
     restart: on-failure
 
-  api-gateway:
-    build: ./api-gateway
-    ports:
-      - "8000:8000"
-    environment:
-      SPRING_APPLICATION_NAME: api-gateway
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-server:8761/eureka/
-    depends_on:
-      - discovery-server
-      - auth-server
-      - user-service
+

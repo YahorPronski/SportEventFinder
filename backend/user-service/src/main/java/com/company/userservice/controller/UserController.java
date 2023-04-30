@@ -26,10 +26,8 @@ public class UserController {
     private final FileUtil fileUtil;
 
     @GetMapping
-    public List<UserResponse> getAllUsers() {
-        return userService.getAllUsers().stream()
-                .map(user -> modelMapper.map(user, UserResponse.class))
-                .collect(Collectors.toList());
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
     }
 
     @GetMapping("/current")
@@ -62,8 +60,8 @@ public class UserController {
         userService.saveUser(user, userAvatar);
     }
 
-    @PatchMapping("/profile")
-    public void updateUserProfile(@RequestBody @Valid UpdateUserInfoDto userInfoDto,
+    @PatchMapping("/current/profile")
+    public void updateUserProfile(@RequestBody @Valid UserInfoDto userInfoDto,
                                   @RequestHeader("X-auth-user-id") Long userId) {
         User loggedInUser = userService.getUserById(userId).get();
         if (!loggedInUser.getEmail().equals(userInfoDto.getEmail()) && userService.isEmailExists(userInfoDto.getEmail())) {
@@ -77,8 +75,8 @@ public class UserController {
         userService.updateUser(userId, user, userAvatar);
     }
 
-    @PatchMapping("/password")
-    public void updateUserPassword(@RequestBody @Valid UpdatePasswordDto passwordDto,
+    @PatchMapping("/current/password")
+    public void updateUserPassword(@RequestBody @Valid PasswordsDto passwordDto,
                                    @RequestHeader("X-auth-user-id") Long userId) {
         User loggedInUser = userService.getUserById(userId).get();
         if (!loggedInUser.getPassword().equals(passwordDto.getOldPassword())) {
