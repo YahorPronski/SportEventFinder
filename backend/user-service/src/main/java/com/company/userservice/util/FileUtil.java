@@ -7,17 +7,14 @@ import org.springframework.stereotype.Component;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+import java.nio.file.*;
 import java.util.Base64;
 
 @Slf4j
 @Component
 public class FileUtil {
 
-    @Value("${user.files.upload.path}")
+    @Value("${files.users.path}")
     private String uploadRootPath;
 
     public void saveFile(String directory, String fileName, byte[] file) {
@@ -43,6 +40,8 @@ public class FileUtil {
         Path absPath = Paths.get(uploadRootPath, directory, fileName);
         try {
             return Files.readAllBytes(absPath);
+        } catch (NoSuchFileException e) {
+            log.info("File not found: {}", absPath);
         } catch (IOException e) {
             log.error("Could not read file {}", absPath, e);
         }

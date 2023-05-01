@@ -21,7 +21,7 @@
 		<module>auth-server</module>
 		<module>discovery-server</module>
 		<module>user-service</module>
-		<module>sport-event-service</module>
+		<module>event-service</module>
     </modules>
 
 	<properties>

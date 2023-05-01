@@ -37,7 +37,7 @@ services:
       - discovery-server
       - auth-server
       - user-service
-      - sport-event-service
+      - event-service
 
   auth-server:
     build: ./auth-server
@@ -70,13 +70,13 @@ services:
       - discovery-server
     restart: on-failure
 
-  sport-event-service:
-    build: ./sport-event-service
+  event-service:
+    build: ./event-service
     ports:
       - "8003:8003"
       - "5003:5003"
     environment:
-      SPRING_APPLICATION_NAME: sport-event-service
+      SPRING_APPLICATION_NAME: event-service
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-server:8761/eureka/
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/sport-event-finder-db
       SPRING_DATASOURCE_USERNAME: postgres
