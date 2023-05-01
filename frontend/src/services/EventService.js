@@ -13,8 +13,6 @@ export const getEvents = async (country, city, sortBy, filters, categories) => {
         }
         if (categories && categories.length > 0) params.append('categories', categories.join(','));
 
-        console.log(params.toString())
-
         return (await API.get('events', { params })).data;
     } catch (error) {
         console.log(error);

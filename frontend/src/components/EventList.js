@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react';
 import * as EventService from '../services/EventService';
 import EventPreview from '../components/EventPreview';
+import '../assets/styles/components/event-list.scss';
 
 const EventList = ({ country, city, sortBy, filters, categories }) => {
     const [events, setEvents] = useState([]);
 
     useEffect(() => {
-        EventService.getEvents(country, city, sortBy, filters, categories).then(setEvents);
+        if (country && city) {
+            EventService.getEvents(country, city, sortBy, filters, categories).then(setEvents);
+        }
     }, [country, city, sortBy, filters, categories]);
 
     return (
