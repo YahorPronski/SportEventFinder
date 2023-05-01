@@ -15,7 +15,7 @@ const Footer = () => {
             </ImageText>
             <div>
                 <p>
-                    © 2022 All rights reserved<br/>
+                    © 2023 All rights reserved<br/>
                     <a href="#">Terms of use & privacy policy</a>
                 </p>
             </div>

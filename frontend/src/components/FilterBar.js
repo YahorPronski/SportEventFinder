@@ -1,32 +1,78 @@
+import { useEffect, useState } from 'react';
+import * as EventService from '../services/EventService';
 import Checkbox from './form/elements/Checkbox';
+import RadioButton from './form/elements/RadioButton';
 import '../assets/styles/components/filter-bar.scss';
 
-const FilterBar = () => {
+const FilterBar = ({ sortBy, setSortBy, filters, setFilters, categories, setCategories }) => {
+    const [allCategories, setAllCategories] = useState([]);
+
+    useEffect(() => {
+        EventService.getCategories().then((data) => {
+            setAllCategories(data);
+        });
+    }, []);
+
+    const handleRadioChange = (e) => {
+        setSortBy(e.target.value);
+    };
+
+    const handleFilterChange = (e) => {
+        const filterName = e.target.name;
+        if (e.target.checked) {
+            setFilters([...filters, filterName]);
+        } else {
+            setFilters(filters.filter((filter) => filter !== filterName));
+        }
+    };
+
+    const handleCategoryChange = (e) => {
+        const categoryName = e.target.name;
+        if (e.target.checked) {
+            setCategories([...categories, categoryName]);
+        } else {
+            setCategories(categories.filter((category) => category !== categoryName));
+        }
+    };
+
     return (
         <div className="filter-bar">
-            <h3 style={{marginTop: 0}}>Sort by</h3>
-
-            <Checkbox label="Start date" name="startDateSort" />
-            <Checkbox label="Sport category" name="sportCategorySort" />
-            <Checkbox label="Ticket price" name="ticketPriceSort" />
+            <h3 style={{ marginTop: 0 }}>Sort by</h3>
+            <RadioButton
+                label="Start date"
+                name="sortByRadioGroup"
+                value="startDateTime"
+                checked={sortBy === 'startDateTime'}
+                onChange={handleRadioChange}
+            />
+            <RadioButton
+                label="Category name"
+                name="sortByRadioGroup"
+                value="category"
+                checked={sortBy === 'category'}
+                onChange={handleRadioChange}
+            />
+            <RadioButton
+                label="Ticket price"
+                name="sortByRadioGroup"
+                value="ticketPrice"
+                checked={sortBy === 'ticketPrice'}
+                onChange={handleRadioChange}
+            />
 
             <h3>Filter by</h3>
-
-            <Checkbox label="Starts today" name="startsTodayFilter" />
-            <Checkbox label="Free entrance" name="freeEntranceFilter" />
+            <Checkbox label="Starts today" name="startsToday" onChange={handleFilterChange} />
+            <Checkbox label="Free entrance" name="freeEntrance" onChange={handleFilterChange} />
 
             <h3>Categories</h3>
-
-            <Checkbox label="Football" name="footballCategory" />
-            <Checkbox label="Basketball" name="basketballCategory" />
-            <Checkbox label="Volleyball" name="volleyballCategory" />
-            <Checkbox label="Tennis" name="tennisCategory" />
-            <Checkbox label="Hockey" name="hockeyCategory" />
-            <Checkbox label="Baseball" name="baseballCategory" />
-            <Checkbox label="Golf" name="golfCategory" />
-            <Checkbox label="Boxing" name="boxingCategory" />
-            <Checkbox label="Swimming" name="swimmingCategory" />
-            <Checkbox label="Gymnastics" name="gymnasticsCategory" />
+            {allCategories.map((category) => (
+                <Checkbox
+                    key={category}
+                    label={category}
+                    name={category}
+                    onChange={handleCategoryChange}
+                />
+            ))}
         </div>
     );
 };

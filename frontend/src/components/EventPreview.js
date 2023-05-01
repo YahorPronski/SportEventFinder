@@ -1,15 +1,15 @@
 import '../assets/styles/components/event-preview.scss';
 
-const EventPreview = () => {
+const EventPreview = ({title, category, location, startDateTime, ticketPrice, imageSrc}) => {
     return (
         <div className="event-preview">
-            <img src="https://via.placeholder.com/150" alt="Event" />
+            <img src={imageSrc ? imageSrc : 'https://via.placeholder.com/150'} alt="Event" />
             <div className="event-info">
-                <h2>Металлург-Жлобин - Неман (Экстралига / Плей-офф)</h2>
-                <p>Hockey</p>
-                <p>Belarus, Grodno, Communal st. 3A (Ice Palace of Sports)</p>
-                <p>21/07/2023 18:00</p>
-                <p>5$</p>
+                <h2>{title}</h2>
+                <p style={{marginBottom: '10px'}}>{category}</p>
+                <p>{location.country}, {location.city}, {location.address}</p>
+                <p>{startDateTime}</p>
+                <p>{ticketPrice > 0 ? `${ticketPrice}$` : 'Free entrance'}</p>
             </div>
         </div>
     );

@@ -112,12 +112,12 @@ const ProfileEditForm = () => {
                     onChange={handleInput}
                     required/>
                 <TextInput
-                    label="First name"
+                    label="First Name"
                     name="firstName"
                     value={userInfo.firstName}
                     onChange={handleInput}/>
                 <TextInput
-                    label="Last name"
+                    label="Last Name"
                     name="lastName"
                     value={userInfo.lastName}
                     onChange={handleInput}/>

@@ -71,7 +71,7 @@ const PasswordEditForm = () => {
         <>
             <form className="password-edit-form">
                 <TextInput
-                    label="Old password"
+                    label="Old Password"
                     name="oldPassword"
                     value={passwords.oldPassword}
                     onChange={handleInput}

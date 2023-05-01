@@ -1,8 +1,3 @@
-import { useState, useEffect, useRef } from 'react';
-import { useLocation, useNavigate } from "react-router-dom";
-//import useAuthContext from "../../context/useAuthContext";
-//import * as AuthService from "../../services/authService";
-import { Link } from 'react-router-dom';
 import RegisterForm from "../components/form/RegisterForm";
 import AlertMessage from "../components/AlertMessage";
 import ImageText from "../components/ImageText";

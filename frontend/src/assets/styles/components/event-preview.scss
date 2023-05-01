@@ -17,18 +17,18 @@
         border-radius: 5px;
     }
 
-    h2 {
-        margin-top: 0;
-        margin-bottom: 15px;
-        font-size: 24px;
-    }
-
-    p {
-        margin: 5px 0;
-        font-size: 16px;
-    }
-
     .event-info {
         flex: 1;
+
+        p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+
+        h2 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
     }
 }
