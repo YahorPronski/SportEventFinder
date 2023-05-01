@@ -67,7 +67,7 @@ public class JwtUtil {
             Jwts.parserBuilder().setSigningKey(secret).build().parseClaimsJws(token);
             return true;
         } catch (ExpiredJwtException expiredEx) {
-            log.error("Token expired", expiredEx);
+            log.error("Token expired");
         } catch (UnsupportedJwtException unsupportedEx) {
             log.error("Unsupported jwt", unsupportedEx);
         } catch (MalformedJwtException malformedEx) {

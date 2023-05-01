@@ -1,6 +1,6 @@
 package com.company.eventservice.controller;
 
-import com.company.eventservice.dto.CategoryDto;
+import com.company.eventservice.model.Category;
 import com.company.eventservice.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -20,9 +20,9 @@ public class CategoryController {
     private final ModelMapper modelMapper;
 
     @GetMapping
-    public List<CategoryDto> getCategories() {
+    public List<String> getCategories() {
         return categoryService.getCategories().stream()
-                .map(category -> modelMapper.map(category, CategoryDto.class))
+                .map(Category::getName)
                 .collect(Collectors.toList());
     }
 

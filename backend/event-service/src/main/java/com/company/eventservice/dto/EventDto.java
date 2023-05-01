@@ -10,6 +10,8 @@ import javax.validation.constraints.Pattern;
 @Data
 public class EventDto {
 
+    private Long id;
+
     @NotBlank
     private String name;
 
