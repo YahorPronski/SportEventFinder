@@ -36,7 +36,7 @@ public class EventController {
         return eventService
                 .getFilteredEvents(country, city, startsToday, freeEntrance, categories, sortBy)
                 .stream()
-                .map(this::mapEventToDto)
+                .map(event -> mapEventToDto(event, eventService.getEventImage(event.getId())))
                 .collect(Collectors.toList());
     }
 
@@ -53,16 +53,18 @@ public class EventController {
         eventService.removeEvent(id);
     }
 
-
     private Event mapDtoToEvent(EventDto eventDto) {
         Event event = modelMapper.map(eventDto, Event.class);
         event.setStartDateTimeFromString(eventDto.getStartDateTime());
         return event;
     }
 
-    private EventDto mapEventToDto(Event event) {
+    private EventDto mapEventToDto(Event event, byte[] eventImage) {
         EventDto eventDto = modelMapper.map(event, EventDto.class);
         eventDto.setStartDateTime(event.getFormattedStartDateTime());
+        if (eventImage != null && eventImage.length > 0) {
+            eventDto.setImageBase64(fileUtil.encodeBase64(eventImage));
+        }
         return eventDto;
     }
 

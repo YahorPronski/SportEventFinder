@@ -43,7 +43,7 @@ public class AuthController {
 
     @PostMapping("/refresh")
     public JwtDto refresh(@RequestBody @NotNull JwtDto jwtDto) {
-        String refreshToken = jwtDto.getAccessToken();
+        String refreshToken = jwtDto.getRefreshToken();
         if (StringUtils.isBlank(refreshToken)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Refresh token is missing");
         }

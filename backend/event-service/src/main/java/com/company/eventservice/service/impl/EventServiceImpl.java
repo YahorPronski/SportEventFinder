@@ -30,7 +30,12 @@ public class EventServiceImpl implements EventService {
     public List<Event> getFilteredEvents(Optional<String> country, Optional<String> city,
                                          Optional<Boolean> startsToday, Optional<Boolean> freeEntrance,
                                          Optional<List<String>> categories, String sortBy) {
-        List<Event> events = eventRepository.findAll(Sort.by(Sort.Direction.ASC, sortBy));
+        List<Event> events;
+        if ("category".equals(sortBy)) {
+            events = eventRepository.findAllOrderByCategoryNameAsc();
+        } else {
+            events = eventRepository.findAll(Sort.by(Sort.Direction.ASC, sortBy));
+        }
 
         return events.stream()
                 .filter(event -> !country.isPresent() || event.getLocation().getCountry().equalsIgnoreCase(country.get()))
@@ -69,8 +74,13 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Optional<Event> getEventById(Long id) {
-        return eventRepository.findById(id);
+    public Optional<Event> getEventById(Long eventId) {
+        return eventRepository.findById(eventId);
+    }
+
+    @Override
+    public byte[] getEventImage(Long eventId) {
+        return fileUtil.readFile(eventId.toString(), "image");
     }
 
     @Override

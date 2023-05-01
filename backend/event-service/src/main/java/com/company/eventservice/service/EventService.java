@@ -12,7 +12,9 @@ public interface EventService {
 
     Event saveEvent(Event event, byte[] eventImage);
 
-    Optional<Event> getEventById(Long id);
+    Optional<Event> getEventById(Long eventId);
+
+    byte[] getEventImage(Long eventId);
 
     void removeEvent(Long id);
 }
